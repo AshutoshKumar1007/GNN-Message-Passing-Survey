@@ -1,0 +1,180 @@
+===== DATASET: actor =====
+
+--- Split 0 ---
+Early stopping at epoch 130
+Test Accuracy: 0.3895
+
+--- Split 1 ---
+Early stopping at epoch 128
+Test Accuracy: 0.3546
+
+--- Split 2 ---
+Early stopping at epoch 130
+Test Accuracy: 0.3618
+
+--- Split 3 ---
+Early stopping at epoch 131
+Test Accuracy: 0.3605
+
+--- Split 4 ---
+Early stopping at epoch 131
+Test Accuracy: 0.3645
+
+--- Split 5 ---
+Early stopping at epoch 130
+Test Accuracy: 0.3684
+
+--- Split 6 ---
+Early stopping at epoch 127
+Test Accuracy: 0.3461
+
+--- Split 7 ---
+Early stopping at epoch 129
+Test Accuracy: 0.3493
+
+--- Split 8 ---
+Early stopping at epoch 131
+Test Accuracy: 0.3572
+
+--- Split 9 ---
+Early stopping at epoch 127
+Test Accuracy: 0.3618
+
+ACTOR → Avg Accuracy: 0.3614
+
+==================================
+===== DATASET: wisconsin =====
+
+
+--- Split 0 ---
+Early stopping at epoch 119
+Test Accuracy: 0.7451
+
+--- Split 1 ---
+Early stopping at epoch 127
+Test Accuracy: 0.8824
+
+--- Split 2 ---
+Early stopping at epoch 122
+Test Accuracy: 0.8824
+
+--- Split 3 ---
+Early stopping at epoch 115
+Test Accuracy: 0.8627
+
+--- Split 4 ---
+Early stopping at epoch 116
+Test Accuracy: 0.8039
+
+--- Split 5 ---
+Early stopping at epoch 119
+Test Accuracy: 0.8431
+
+--- Split 6 ---
+Early stopping at epoch 122
+Test Accuracy: 0.8431
+
+--- Split 7 ---
+Early stopping at epoch 119
+Test Accuracy: 0.8039
+
+--- Split 8 ---
+Early stopping at epoch 123
+Test Accuracy: 0.8235
+
+--- Split 9 ---
+Early stopping at epoch 125
+Test Accuracy: 0.8824
+
+WISCONSIN → Avg Accuracy: 0.8373
+
+=============================================
+===== DATASET: squirrel =====
+--- Split 0 ---
+Early stopping at epoch 115
+Test Accuracy: 0.3622
+
+--- Split 1 ---
+Early stopping at epoch 117
+Test Accuracy: 0.3929
+
+--- Split 2 ---
+Early stopping at epoch 117
+Test Accuracy: 0.3823
+
+--- Split 3 ---
+Early stopping at epoch 116
+Test Accuracy: 0.3939
+
+--- Split 4 ---
+Early stopping at epoch 114
+Test Accuracy: 0.4131
+
+--- Split 5 ---
+Early stopping at epoch 115
+Test Accuracy: 0.3756
+
+--- Split 6 ---
+Early stopping at epoch 116
+Test Accuracy: 0.3660
+
+--- Split 7 ---
+Early stopping at epoch 116
+Test Accuracy: 0.3900
+
+--- Split 8 ---
+Early stopping at epoch 117
+Test Accuracy: 0.3939
+
+--- Split 9 ---
+Early stopping at epoch 115
+Test Accuracy: 0.3573
+
+SQUIRREL → Avg Accuracy: 0.3827
+
+=======================================
+===== DATASET: chameleon =====
+
+--- Split 0 ---
+Early stopping at epoch 122
+Test Accuracy: 0.4934
+
+--- Split 1 ---
+Early stopping at epoch 120
+Test Accuracy: 0.5088
+
+--- Split 2 ---
+Early stopping at epoch 121
+Test Accuracy: 0.4737
+
+--- Split 3 ---
+Early stopping at epoch 122
+Test Accuracy: 0.5461
+
+--- Split 4 ---
+Early stopping at epoch 120
+Test Accuracy: 0.4825
+
+--- Split 5 ---
+Early stopping at epoch 120
+Test Accuracy: 0.5022
+
+--- Split 6 ---
+Early stopping at epoch 119
+Test Accuracy: 0.4496
+
+--- Split 7 ---
+Early stopping at epoch 121
+Test Accuracy: 0.4737
+
+--- Split 8 ---
+Early stopping at epoch 120
+Test Accuracy: 0.5175
+
+--- Split 9 ---
+Early stopping at epoch 119
+Test Accuracy: 0.5197
+
+CHAMELEON → Avg Accuracy: 0.4967
+==================================
+===== DATASET: cornell =====
