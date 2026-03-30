@@ -1,0 +1,46 @@
+===== DATASET: texas =====
+
+--- Split 0 ---
+Early stopping at epoch 127
+Test Accuracy: 0.6216
+
+--- Split 1 ---
+Early stopping at epoch 134
+Test Accuracy: 0.5676
+
+--- Split 2 ---
+Early stopping at epoch 134
+Test Accuracy: 0.4865
+
+--- Split 3 ---
+Early stopping at epoch 143
+Test Accuracy: 0.5676
+
+--- Split 4 ---
+Early stopping at epoch 127
+Test Accuracy: 0.4865
+
+--- Split 5 ---
+Early stopping at epoch 119
+Test Accuracy: 0.5946
+
+--- Split 6 ---
+Early stopping at epoch 121
+Test Accuracy: 0.5135
+
+--- Split 7 ---
+Early stopping at epoch 124
+Test Accuracy: 0.5946
+
+--- Split 8 ---
+Early stopping at epoch 126
+Test Accuracy: 0.6486
+
+--- Split 9 ---
+Early stopping at epoch 128
+Test Accuracy: 0.6486
+
+TEXAS → Avg Accuracy: 0.5730
+
+================================
+===== DATASET: actor =====
