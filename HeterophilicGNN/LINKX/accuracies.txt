@@ -1,0 +1,47 @@
+===== DATASET: actor =====
+Inside load_dataset
+name: actor
+feature shape: torch.Size([7600, 932])
+Model Name: LINKX
+lr : 0.07 | weight_decay : 0.01 | dropout : 0.5 | batch_size = 1024 | hidden_dim : 20
+
+--- Split 0 ---
+Early stopping at epoch 103
+Test Accuracy: 0.3382
+
+--- Split 1 ---
+Early stopping at epoch 141
+Test Accuracy: 0.3480
+
+--- Split 2 ---
+Early stopping at epoch 178
+Test Accuracy: 0.3691
+
+--- Split 3 ---
+Early stopping at epoch 195
+Test Accuracy: 0.3526
+
+--- Split 4 ---
+Early stopping at epoch 180
+Test Accuracy: 0.3566
+
+--- Split 5 ---
+Early stopping at epoch 213
+Test Accuracy: 0.3572
+
+--- Split 6 ---
+Test Accuracy: 0.3401
+
+--- Split 7 ---
+Early stopping at epoch 159
+Test Accuracy: 0.3737
+
+--- Split 8 ---
+Early stopping at epoch 126
+Test Accuracy: 0.3546
+
+--- Split 9 ---
+Early stopping at epoch 122
+Test Accuracy: 0.3664
+
+ACTOR → Avg Accuracy: 0.3557
