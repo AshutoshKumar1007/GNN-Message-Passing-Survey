@@ -50,7 +50,7 @@ class GCN(nn.Module):
  
  
 # =========================================================
-# 2. MultiHopGNN (Your MixHop Implementation)
+# 2. MultiHopGNN 
 # =========================================================
  
 class MultiHopGNN(nn.Module):
@@ -102,7 +102,7 @@ class MultiHopGNN(nn.Module):
  
  
 # =========================================================
-# 3. H2GCN - Original (Your Implementation)
+# 3. H2GCN - Original
 # =========================================================
  
 class H2GCN_Original(nn.Module):
@@ -184,7 +184,7 @@ class H2GCN_Original(nn.Module):
  
  
 # =========================================================
-# 4. H2GCN - Improved Full Version (with all fixes)
+# 4. H2GCN 
 # =========================================================
  
 class H2GCN_Improved(nn.Module):
@@ -202,9 +202,9 @@ class H2GCN_Improved(nn.Module):
     """
     
     def __init__(self, in_dim, hidden_dim, num_classes, num_layers=2, 
-                 dropout=0.5, use_ego_neighbor_separation=True):
+                 dropout=0.5, use_ego_neighbor_separation=True, debug = False):
         super().__init__()
-        
+        self.debug = debug
         self.K = num_layers
         self.use_ego = use_ego_neighbor_separation
         
@@ -251,6 +251,8 @@ class H2GCN_Improved(nn.Module):
     
     def build_adjacency(self, edge_index, n, device):
         """Build adjacency matrix - NO self-loops (critical for heterophily)"""
+        assert edge_index.min() >= 0, "Negative index found"
+        assert edge_index.max() < n, f"Index out of bounds: max={edge_index.max()}, n={n}"
         A = torch.zeros((n, n), device=device)
         A[edge_index[0], edge_index[1]] = 1
         
@@ -271,7 +273,16 @@ class H2GCN_Improved(nn.Module):
         n = X.size(0)
         
         # Build adjacency matrices
+        if self.debug:
+            print("n:", n)
+            print("X shape:", X.shape)
+            print("edge_index shape:", edge_index.shape)
+            print("edge_index min:", edge_index.min().item())
+            print("edge_index max:", edge_index.max().item())
+
         A = self.build_adjacency(edge_index, n, X.device)
+
+
         A1_norm = self.normalize(A)
         
         A2 = self.compute_A2(A)
@@ -409,10 +420,6 @@ class H2GCN_Simple(nn.Module):
         
         return out
  
- 
-# =========================================================
-# Alias for backward compatibility
-# =========================================================
  
 # Default H2GCN points to the improved version
 H2GCN = H2GCN_Simple  # Use simple by default (good balance of performance/complexity)
