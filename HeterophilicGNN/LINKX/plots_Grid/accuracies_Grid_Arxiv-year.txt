@@ -1,0 +1,96 @@
+Grid Search:   0%|                                                                 | 0/54 [00:00<?, ?it/s, lr=0.0005, wd=0.005]
+===== DATASET: arxiv-year =====
+
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.4 | batch_size = 1024 | hidden_dim : 64|patience: 300| Epochs: 500
+Num splits: 5
+
+--- Split 0 ---
+Early stopping at epoch 438
+Test Accuracy: 0.4702
+
+--- Split 1 ---
+Test Accuracy: 0.4697
+
+--- Split 2 ---
+Early stopping at epoch 457
+Test Accuracy: 0.4685
+
+--- Split 3 ---
+Test Accuracy: 0.4664
+
+--- Split 4 ---
+Test Accuracy: 0.4677
+
+ARXIV-YEAR → Avg Accuracy: 0.4685
+
+Grid Search:   2%|██                                                 | 1/54 [1:49:00<96:17:48, 6540.92s/it, lr=0.0005, wd=0.005]
+
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.5 | batch_size = 1024 | hidden_dim : 64|patience: 300| Epochs: 500
+Num splits: 5
+
+--- Split 0 ---
+Early stopping at epoch 467
+Test Accuracy: 0.4702
+
+--- Split 1 ---
+Early stopping at epoch 484
+Test Accuracy: 0.4674
+
+--- Split 2 ---
+Test Accuracy: 0.4704
+
+--- Split 3 ---
+Early stopping at epoch 496
+Test Accuracy: 0.4678
+
+--- Split 4 ---
+Test Accuracy: 0.4678
+
+ARXIV-YEAR → Avg Accuracy: 0.4687
+
+Grid Search:   4%|████▏                                                    | 2/54 [3:43:14<97:07:57, 6724.56s/it, lr=0.0005, wd=0.005]
+
+
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.6 | batch_size = 1024 | hidden_dim : 64|patience: 300| Epochs: 500
+Num splits: 5
+
+--- Split 0 ---
+Test Accuracy: 0.4688
+
+--- Split 1 ---
+Test Accuracy: 0.4642
+
+--- Split 2 ---
+Test Accuracy: 0.4653
+
+--- Split 3 ---
+Test Accuracy: 0.4664
+
+--- Split 4 ---
+Test Accuracy: 0.4667
+ARXIV-YEAR → Avg Accuracy: 0.4663
+Grid Search:   6%|██████▎                                                      | 3/54 [5:38:15<96:24:39, 68]
+
+# Here added Adjacency Degree Normalization
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.6 | batch_size = 1024 | hidden_dim : 128|patience: 50| Epochs: 500
+Num splits: 5
+
+--- Split 0 ---
+Early stopping at epoch 72
+Test Accuracy: 0.4874
+
+--- Split 1 ---
+Early stopping at epoch 70
+Test Accuracy: 0.4834
+
+--- Split 2 ---
+Early stopping at epoch 70
+Test Accuracy: 0.4837
+
+--- Split 3 ---
+Early stopping at epoch 70
+Test Accuracy: 0.4829

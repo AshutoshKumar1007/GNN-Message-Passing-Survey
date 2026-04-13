@@ -1,0 +1,91 @@
+===== DATASET: fb100-Amherst41 =====
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.6 | batch_size = 256 | hidden_dim : 128|patience: 50| Epochs: 500
+Using RANDOM splits: 10
+
+--- Run 0 ---
+Early stopping at epoch 72
+Test Accuracy: 0.7606
+
+--- Run 1 ---
+Early stopping at epoch 76
+Test Accuracy: 0.7427
+
+--- Run 2 ---
+Early stopping at epoch 83
+Test Accuracy: 0.7360
+
+--- Run 3 ---
+Early stopping at epoch 75
+Test Accuracy: 0.7226
+
+--- Run 4 ---
+Early stopping at epoch 75
+Test Accuracy: 0.7539
+
+--- Run 5 ---
+Early stopping at epoch 73
+Test Accuracy: 0.7360
+
+--- Run 6 ---
+Early stopping at epoch 79
+Test Accuracy: 0.7360
+
+--- Run 7 ---
+Early stopping at epoch 78
+Test Accuracy: 0.7271
+
+--- Run 8 ---
+Early stopping at epoch 79
+Test Accuracy: 0.7248
+
+--- Run 9 ---
+Early stopping at epoch 77
+Test Accuracy: 0.7606
+
+FB100 → Avg Accuracy: 0.7400 ± 0.0134
+
+===== DATASET: fb100-Amherst41 =====
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.6 | batch_size = 256 | hidden_dim : 128|patience: 10| Epochs: 500
+Using RANDOM splits: 10
+
+--- Run 0 ---
+Early stopping at epoch 32
+Test Accuracy: 0.7606
+
+--- Run 1 ---
+Early stopping at epoch 39
+Test Accuracy: 0.7136
+
+--- Run 2 ---
+Early stopping at epoch 39
+Test Accuracy: 0.7539
+
+--- Run 3 ---
+Early stopping at epoch 38
+Test Accuracy: 0.7204
+
+--- Run 4 ---
+Early stopping at epoch 34
+Test Accuracy: 0.7136
+
+--- Run 5 ---
+Early stopping at epoch 37
+Test Accuracy: 0.7450
+
+--- Run 6 ---
+Early stopping at epoch 39
+Test Accuracy: 0.7315
+
+--- Run 7 ---
+Early stopping at epoch 36
+Test Accuracy: 0.7204
+
+--- Run 8 ---
+Early stopping at epoch 37
+Test Accuracy: 0.7069
+
+--- Run 9 ---
+Early stopping at epoch 36
+Test Accuracy: 0.7271

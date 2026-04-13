@@ -300,73 +300,265 @@ class LINKX(nn.Module):
 # 5. LINKXC
 # =========================================================
 
-def build_sparse_adjacency(edge_index, num_nodes, normalization = True, device = 'cuda'):
-    """
-    edge_index: (2, E)
-    """
-
+def build_sparse_adjacency(edge_index, num_nodes, device):
     row, col = edge_index
 
-    # Make undirected
-    row = torch.cat([row, col])
-    col = torch.cat([col, row])
+    # undirected edges
+    row_all = torch.cat([row, col])
+    col_all = torch.cat([col, row])
 
-    values = torch.ones(row.size(0), device=device)
+    values = torch.ones(row_all.size(0), device=device)
 
     A = torch.sparse_coo_tensor(
-        torch.stack([row, col]),
+        torch.stack([row_all, col_all]),
         values,
         (num_nodes, num_nodes)
     )
 
-    # Row normalization (optional but recommended)
+    # row normalization
     deg = torch.sparse.sum(A, dim=1).to_dense().clamp(min=1)
     deg_inv = 1.0 / deg
 
-    # Normalize values
-    row_idx = row
-    values = deg_inv[row_idx]
+    values = deg_inv[row_all]
 
     A = torch.sparse_coo_tensor(
-        torch.stack([row, col]),
+        torch.stack([row_all, col_all]),
         values,
         (num_nodes, num_nodes)
     )
 
     return A.coalesce()
 
+def build_dense_adjacency(edge_index, num_nodes, device):
+    A = torch.zeros((num_nodes, num_nodes), device=device)
+
+    row, col = edge_index
+
+    # undirected
+    A[row, col] = 1
+    A[col, row] = 1
+
+    # optional normalization
+    deg = A.sum(dim=1, keepdim=True).clamp(min=1)
+    A = A / deg
+
+    return A
+
+# def compute_HA(edge_index, batch_nodes, W_adj):
+#     row, col = edge_index
+
+#     # select edges where destination is in batch (COLUMN logic)
+#     mask = torch.isin(col, batch_nodes)
+
+#     row = row[mask]
+#     col = col[mask]
+
+#     # map global node index → batch index
+#     batch_map = -torch.ones(W_adj.size(0), dtype=torch.long, device=W_adj.device)
+#     batch_map[batch_nodes] = torch.arange(batch_nodes.size(0), device=W_adj.device)
+
+#     batch_col = batch_map[col]
+
+#     HA = torch.zeros((batch_nodes.size(0), W_adj.size(1)), device=W_adj.device)
+
+#     # aggregate neighbor embeddings
+#     HA.index_add_(0, batch_col, W_adj[row])
+
+#     return HA
+
+# class LINKXC(nn.Module):
+#     def __init__(self, feat_dim, hidden_dim, num_nodes, num_classes, ignoreA = False, ignoreX = False):
+#         super().__init__()
+        
+#         self.ignoreA = ignoreA
+#         self.ignoreX = ignoreX
+#         #  ----------------------
+
+#         self.MLPX = nn.Linear(feat_dim, hidden_dim)
+#         # self.MLPA = nn.Linear(num_nodes, hidden_dim)
+#         self.W_adj = nn.Parameter(torch.randn(num_nodes, hidden_dim)) # initilized to find HA
+
+#         self.W = nn.Linear(hidden_dim, hidden_dim) if self.ignoreX or self.ignoreA else nn.Linear(2 * hidden_dim, hidden_dim)
+#         self.out = nn.Linear(hidden_dim, num_classes)
+
+#     def forward(self, X,edge_index ,A, batch_nodes=None , debug = False):
+
+#         if batch_nodes is None:
+#             # A_batch = A
+#             X_batch = X
+#         else:
+#             # A_batch = A[batch_nodes]   # (B, N)
+#             X_batch = X[batch_nodes]
+
+#         if debug: print("X_batch:", X_batch.shape)
+#         # print("A_batch:", A_batch.shape)
+#         # print("First row sum:", A_batch[0].sum())
+#         if debug: print("First col sum:", A[:, batch_nodes[0]].sum())
+
+#         if not self.ignoreX: HX = torch.relu(self.MLPX(X_batch))
+#         # HA = torch.relu(self.MLPA(A_batch))
+
+#         if not self.ignoreA: HA = torch.relu(compute_HA(edge_index, batch_nodes, self.W_adj))
+        
+        
+#         if not self.ignoreX or self.ignoreA: 
+#             H = torch.cat([HA, HX], dim=1) 
+#             H = self.W(H) + HA + HX # in paper we do not transform X , it kep as it is but follows, Dropout and Relu
+#         elif self.ignoreA: 
+#             H = HX
+#             H = self.W(H) + HX
+#         elif self.ignoreX: 
+#             H = HA
+#             H = self.W(H) + HA 
+
+#         return self.out(H) # logits or embeddings
+
+def compute_HA(edge_index, batch_nodes, W_adj):
+    row, col = edge_index
+    # Select edges where destination is in batch (COLUMN logic)
+    mask = torch.isin(col, batch_nodes)
+    row = row[mask]
+    col = col[mask]
+    
+    # Map global node index → batch index
+    batch_map = -torch.ones(W_adj.size(0), dtype=torch.long, device=W_adj.device)
+    batch_map[batch_nodes] = torch.arange(batch_nodes.size(0), device=W_adj.device)
+    batch_col = batch_map[col]
+    
+    # Aggregate neighbor embeddings
+    HA = torch.zeros((batch_nodes.size(0), W_adj.size(1)), device=W_adj.device)
+
+    # == Degree normalization like a mean aggregation 
+    deg = torch.zeros(batch_nodes.size(0), device=W_adj.device)#
+    deg.index_add_(0, batch_col, torch.ones_like(batch_col, dtype=torch.float))#
+
+    HA.index_add_(0, batch_col, W_adj[row])#
+
+    deg = deg.clamp(min=1).unsqueeze(1)#
+    HA = HA / deg #
+    
+    # ====================
+    HA.index_add_(0, batch_col, W_adj[row]) # ====
+    
+    return HA
+
 class LINKXC(nn.Module):
-    def __init__(self, feat_dim, hidden_dim, num_nodes, num_classes):
+    def __init__(self, feat_dim, hidden_dim, num_nodes, num_classes, 
+                 ignoreA=False, ignoreX=False, dropout=0.5):
         super().__init__()
-
-        self.MLPX = nn.Linear(feat_dim, hidden_dim)
-        self.MLPA = nn.Linear(num_nodes, hidden_dim)
-
-        self.W = nn.Linear(2 * hidden_dim, hidden_dim)
+        self.ignoreA = ignoreA
+        self.ignoreX = ignoreX
+        
+        # Feature transformation
+        if not self.ignoreX:
+            self.MLPX = nn.Linear(feat_dim, hidden_dim)
+        
+        # Adjacency embedding
+        if not self.ignoreA:
+            self.W_adj = nn.Parameter(torch.randn(num_nodes, hidden_dim))
+            nn.init.xavier_uniform_(self.W_adj)  # Better initialization
+        
+        # Combined transformation
+        input_dim = 0
+        if not self.ignoreX:
+            input_dim += hidden_dim
+        if not self.ignoreA:
+            input_dim += hidden_dim
+            
+        self.W = nn.Linear(input_dim, hidden_dim)
+        self.dropout = nn.Dropout(dropout)
         self.out = nn.Linear(hidden_dim, num_classes)
-
-    def forward(self, X, A_sparse, batch_nodes=None):
-        """
-        X: (N, feat_dim)
-        A_sparse: sparse adjacency (N x N)
-        batch_nodes: indices of nodes to train on
-        """
-
+        
+    def forward(self, X, edge_index, A=None, batch_nodes=None, debug=False):
+        # Handle batch selection
         if batch_nodes is None:
-            # full batch
-            A_batch = A_sparse.to_dense()
+            batch_nodes = torch.arange(X.size(0), device=X.device)
             X_batch = X
         else:
-            # ONLY sample rows, keep full columns
-            A_batch = A_sparse[batch_nodes].to_dense()   # (B, N)
-            X_batch = X[batch_nodes]      # (B, feat_dim)
+            X_batch = X[batch_nodes]
+        
+        if debug:
+            print(f"X_batch shape: {X_batch.shape}")
+            print(f"batch_nodes shape: {batch_nodes.shape}")
+        
+        # Compute embeddings
+        embeddings = []
+        residuals = []
+        
+        if not self.ignoreX:
+            HX = torch.relu(self.MLPX(X_batch))
+            embeddings.append(HX)
+            residuals.append(HX)
+            if debug:
+                print(f"HX shape: {HX.shape}")
+        
+        if not self.ignoreA:
+            HA = torch.relu(compute_HA(edge_index, batch_nodes, self.W_adj))
+            embeddings.append(HA)
+            residuals.append(HA)
+            if debug:
+                print(f"HA shape: {HA.shape}")
+        
+        # Combine and transform
+        # H = torch.cat(embeddings, dim=1)
+        # H = self.W(H)
+        
+        res = torch.cat(residuals, dim = 1)
+        res = self.W(res) # projecting to same space
+        # Add residuals
+        # for res in residuals:
+        #     H = H + res
 
-        # MLPs
-        HX = torch.relu(self.MLPX(X_batch))
-        HA = torch.relu(self.MLPA(A_batch))
+        H = self.W(torch.cat(embeddings, dim=1))
+        H = H + res
+        
+        H = self.dropout(H)
+        
+        return self.out(H)
 
-        # Combine
-        H = torch.cat([HA, HX], dim=1)
-        H = self.W(H) + HA + HX
-
+# Alternative: Simplified LINKX (closer to paper)
+class LINKXS(nn.Module):
+    def __init__(self, feat_dim, hidden_dim, num_nodes, num_classes, 
+                 num_layers=1, dropout=0.5):
+        super().__init__()
+        
+        # MLP for features
+        self.MLPX = nn.Sequential(
+            nn.Linear(feat_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout)
+        )
+        
+        # Learnable adjacency embeddings
+        self.W_adj = nn.Parameter(torch.randn(num_nodes, hidden_dim))
+        nn.init.xavier_uniform_(self.W_adj)
+        
+        # MLP for aggregated neighbors
+        self.MLPA = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Dropout(dropout)
+        )
+        
+        # Final MLP
+        self.W = nn.Linear(2 * hidden_dim, hidden_dim)
+        self.out = nn.Linear(hidden_dim, num_classes)
+        
+    def forward(self, X, edge_index, batch_nodes=None, debug=False):
+        if batch_nodes is None:
+            batch_nodes = torch.arange(X.size(0), device=X.device)
+        
+        X_batch = X[batch_nodes]
+        
+        # Process features
+        HX = self.MLPX(X_batch)
+        
+        # Aggregate neighbors
+        HA_raw = compute_HA(edge_index, batch_nodes, self.W_adj)
+        HA = self.MLPA(HA_raw)
+        
+        # Combine with residuals
+        H = torch.cat([HX, HA], dim=1)
+        H = self.W(H) + HX + HA
+        
         return self.out(H)

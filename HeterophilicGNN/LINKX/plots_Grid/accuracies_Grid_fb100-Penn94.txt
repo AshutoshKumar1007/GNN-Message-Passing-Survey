@@ -1,0 +1,25 @@
+Model Name: LINKX
+lr : 0.0005 | weight_decay : 0.005 | dropout : 0.6 | batch_size = 1024 | hidden_dim : 128|patience: 50| Epochs: 500
+Num splits: 5
+
+--- Split 0 ---
+zzzzzEarly stopping at epoch 52
+Test Accuracy: 0.8231
+
+--- Split 1 ---
+Early stopping at epoch 52
+Test Accuracy: 0.8262
+
+--- Split 2 ---
+Early stopping at epoch 52
+Test Accuracy: 0.8245
+
+--- Split 3 ---
+Early stopping at epoch 52
+Test Accuracy: 0.8225
+
+--- Split 4 ---
+Early stopping at epoch 52
+Test Accuracy: 0.8182
+
+FB100 → Avg Accuracy: 0.8229
