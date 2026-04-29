@@ -1,0 +1,29 @@
+20:20:46 [INFO] device=cuda  model=tgn  dataset=elliptic
+20:20:56 [INFO] tgn: memory_dim=100  emb=100  neighbor_size=10  bs=200
+20:20:56 [INFO] class_weight: [0.5654888153076172, 4.317446708679199]
+20:22:55 [INFO] ep 001  train_loss 0.1909  val AUC 0.9803  val F1-anom 0.7887  thr 0.920  *
+20:24:54 [INFO] ep 002  train_loss 0.1344  val AUC 0.9843  val F1-anom 0.8163  thr 0.928  *
+20:26:53 [INFO] ep 003  train_loss 0.1139  val AUC 0.9832  val F1-anom 0.7959  thr 0.940  
+20:28:54 [INFO] ep 004  train_loss 0.1014  val AUC 0.9850  val F1-anom 0.8064  thr 0.975  
+20:30:53 [INFO] ep 005  train_loss 0.0938  val AUC 0.9817  val F1-anom 0.7616  thr 0.957  
+20:32:53 [INFO] ep 006  train_loss 0.0887  val AUC 0.9768  val F1-anom 0.7553  thr 0.854  
+20:34:54 [INFO] ep 007  train_loss 0.0825  val AUC 0.9696  val F1-anom 0.7552  thr 0.970  
+20:36:50 [INFO] ep 008  train_loss 0.0785  val AUC 0.9839  val F1-anom 0.7974  thr 0.933  
+20:36:50 [INFO] early stop @ epoch 8; best val F1-anom = 0.8163
+20:37:35 [INFO] ======================================================================
+20:37:35 [INFO] FINAL  dataset=elliptic  model=tgn
+20:37:35 [INFO] val  : AUC 0.9848  F1-anom 0.8241
+20:37:35 [INFO] test : AUC 0.8892  F1-anom 0.5726  P 0.6327  R 0.5230
+20:37:35 [INFO] confusion (test):
+[[27050   324]
+ [  509   558]]
+20:37:35 [INFO] classification report (test):
+              precision    recall  f1-score   support
+
+      benign     0.9815    0.9882    0.9848     27374
+     anomaly     0.6327    0.5230    0.5726      1067
+
+    accuracy                         0.9707     28441
+   macro avg     0.8071    0.7556    0.7787     28441
+weighted avg     0.9684    0.9707    0.9694     28441
+

@@ -1,0 +1,3 @@
+19:55:59 [INFO] device=cuda  model=tgn  dataset=elliptic
+19:56:09 [INFO] tgn: memory_dim=100  emb=100  neighbor_size=10  bs=200
+19:56:09 [INFO] class_weight: [0.5654888153076172, 4.317446708679199]

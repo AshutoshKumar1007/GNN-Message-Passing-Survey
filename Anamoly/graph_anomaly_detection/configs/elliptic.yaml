@@ -1,0 +1,90 @@
+# Elliptic Bitcoin — temporal split, binary node classification
+# class 1 = illicit (anomaly, positive), class 2 = licit, class -1 = unknown (excluded from loss)
+
+seed: 42
+device: cuda          # auto-falls back to cpu
+
+dataset:
+  name: elliptic
+  root: /home/gowrav8849/V2/Anamoly/data/Elliptic_data
+  use_aggregated_features: true   # set false for a clean "structure-only helps?" ablation
+  temporal_split:
+    train_max_t: 34
+    val_max_t: 39
+    # test = everything with t >= 40
+
+# Strict: no edges that cross from future -> past are allowed in training.
+# (Elliptic's edges are between nodes of the same or adjacent timesteps, so this is largely automatic.)
+strict_temporal: true
+
+loader:
+  # NeighborLoader params (mini-batched for 4GB VRAM)
+  batch_size: 512 # ----------------========================= batch_size 
+  num_neighbors: [15, 10]    # 2-hop sampling # ---------------------================= [10, 5] or [5,5]
+  num_workers: 2
+# for GCN lower LR
+# for TGN stability 
+#tgn:
+#  batch_size: 200 -> 100
+#  neighbor_size: 10 -> 5
+# lr: 1e-3 -> 5e-4
+
+# run each model 2-3 times
+train:
+  epochs: 60
+  patience: 10              # early stopping on val F1-anomaly
+  lr: 1e-3 # ====================================== lr's
+  weight_decay: 5.0e-4 # ============================ weight decay
+  lr_scheduler: plateau     # ReduceLROnPlateau on val F1
+  scheduler_factor: 0.5
+  scheduler_patience: 4
+  grad_clip: 1.0
+  # class imbalance handling
+  class_weight: balanced    # "balanced" -> inverse-freq; or a float giving pos_weight
+  # at eval time, sweep threshold on val for best F1, then use on test
+  threshold_search: true
+
+models:
+  mlp:
+    hidden: 128
+    num_layers: 3
+    dropout: 0.3
+  gcn:
+    hidden: 128
+    num_layers: 2
+    dropout: 0.3
+  sage:
+    hidden: 128
+    num_layers: 2
+    dropout: 0.3
+    aggr: mean
+  gat:
+    hidden: 64
+    heads: 2
+    num_layers: 2
+    dropout: 0.3
+  h2gcn:
+    hidden: 64
+    k_hops: 2
+    dropout: 0.3
+  linkx:
+    hidden: 128
+    num_layers: 1
+    inner_mlp_layers: 1
+    dropout: 0.3
+
+tgn:
+  memory_dim: 100
+  time_dim: 100
+  embedding_dim: 100
+  neighbor_size: 6
+  batch_size: 80           # number of events per temporal batch
+  epochs: 30
+  patience: 6
+  lr: 7.0e-4
+  message_module: identity  # {identity, mlp}
+  aggregator: last          # {last, mean}
+
+logging:
+  runs_dir: runs
+  results_csv: reports/results.csv

@@ -1,0 +1,47 @@
+14:08:33 [INFO] ============================================================
+14:08:33 [INFO] TGN CONFIG:
+memory_dim: 100
+time_dim: 100
+embedding_dim: 100
+neighbor_size: 5
+batch_size: 100
+epochs: 30
+patience: 6
+lr: 0.0008
+message_module: identity
+aggregator: last
+
+14:08:33 [INFO] ============================================================
+14:08:33 [INFO] device=cuda  model=tgn  dataset=elliptic
+14:08:43 [INFO] tgn: memory_dim=100  emb=100  neighbor_size=5  bs=100
+14:08:43 [INFO] class_weight: [0.5654888153076172, 4.317446708679199]
+14:09:41 [INFO] ep 001  train_loss 0.1668  val AUC 0.9825  val F1-anom 0.8079  thr 0.920  *
+14:10:39 [INFO] ep 002  train_loss 0.1215  val AUC 0.9834  val F1-anom 0.7994  thr 0.952  
+14:11:38 [INFO] ep 003  train_loss 0.1075  val AUC 0.9861  val F1-anom 0.8278  thr 0.919  *
+14:12:36 [INFO] ep 004  train_loss 0.0949  val AUC 0.9827  val F1-anom 0.7711  thr 0.949  
+14:13:34 [INFO] ep 005  train_loss 0.0876  val AUC 0.9821  val F1-anom 0.7796  thr 0.940  
+14:14:32 [INFO] ep 006  train_loss 0.0813  val AUC 0.9872  val F1-anom 0.8349  thr 0.919  *
+14:15:31 [INFO] ep 007  train_loss 0.0756  val AUC 0.9763  val F1-anom 0.7556  thr 0.923  
+14:16:29 [INFO] ep 008  train_loss 0.0713  val AUC 0.9810  val F1-anom 0.7869  thr 0.956  
+14:17:27 [INFO] ep 009  train_loss 0.0707  val AUC 0.9709  val F1-anom 0.7914  thr 0.943  
+14:18:26 [INFO] ep 010  train_loss 0.0656  val AUC 0.9764  val F1-anom 0.7973  thr 0.958  
+14:19:24 [INFO] ep 011  train_loss 0.0633  val AUC 0.9865  val F1-anom 0.7959  thr 0.930  
+14:20:23 [INFO] ep 012  train_loss 0.0593  val AUC 0.9872  val F1-anom 0.8027  thr 0.868  
+14:20:23 [INFO] early stop @ epoch 12; best val F1-anom = 0.8349
+14:21:04 [INFO] ======================================================================
+14:21:04 [INFO] FINAL  dataset=elliptic  model=tgn
+14:21:04 [INFO] val  : AUC 0.9860  F1-anom 0.8320
+14:21:04 [INFO] test : AUC 0.9089  F1-anom 0.5955  P 0.6778  R 0.5310
+14:21:04 [INFO] confusion (test):
+[[29881   281]
+ [  522   591]]
+14:21:04 [INFO] classification report (test):
+              precision    recall  f1-score   support
+
+      benign     0.9828    0.9907    0.9867     30162
+     anomaly     0.6778    0.5310    0.5955      1113
+
+    accuracy                         0.9743     31275
+   macro avg     0.8303    0.7608    0.7911     31275
+weighted avg     0.9720    0.9743    0.9728     31275
+

@@ -1,0 +1,16 @@
+The analysis of the model performance metrics across the **elliptic** and **yelp** datasets reveals several key insights into how different architectures handle anomaly detection tasks.### Key Takeaways  * **MLP Model Consistency:** The `mlp` model demonstrates strong and consistent performance across both datasets when evaluated by the Macro F1 score on the test split.
+    
+      * In the **elliptic** dataset, it achieved the top Macro F1 score of **0.7983**.
+      * In the **yelp** dataset, it also led the group with a Macro F1 score of **0.7402**.
+      * This indicates that a standard Multi-Layer Perceptron serves as a highly effective baseline for these tasks.
+
+  * **Graph-Based Model Performance (ROC AUC):** While the `mlp` leads in Macro F1, graph-based models like `h2gcn` and `sage` show superior ranking capabilities as measured by ROC AUC.
+    
+      * The `h2gcn` model reached the highest ROC AUC on the **elliptic** dataset at **0.8911**.
+      * On the **yelp** dataset, the `sage` model outperformed others with an ROC AUC of **0.8704**.
+      * These results suggest that Graph Neural Networks (GNNs) are particularly adept at distinguishing between classes, even if they don't always achieve the best balance of precision and recall.
+
+  * **Dataset Variability and Model Sensitivity:** There is a notable difference in overall performance between the two datasets, and some models show high sensitivity to the data structure.
+    
+      * Models generally performed better on the **elliptic** dataset (Macro F1: \~0.65 to \~0.80) than on the **yelp** dataset (Macro F1: \~0.46 to \~0.74).
+      * The `gcn` model struggled significantly on the **yelp** dataset, yielding a Macro F1 of **0.4582** and an ROC AUC of **0.4756**, which is close to random chance.### Performance Comparison (Test Split)
