@@ -1,0 +1,74 @@
+19:55:13 [INFO] device=cuda  model=linkx  dataset=elliptic
+19:55:22 [INFO] dataset stats: {'nodes': 203769, 'edges': 234355, 'features': 165, 'labeled_nodes': 46564, 'anomalous': 4545, 'benign': 42019, 'anomaly_rate': 0.0976, 'train_nodes': 29894, 'val_nodes': 5486, 'test_nodes': 11184, 'timesteps': 49}
+19:55:22 [INFO] edge homophily (labeled endpoints): 0.9537
+19:55:22 [INFO] class_weight: [0.5654888153076172, 4.317446708679199]
+19:55:22 [INFO] model:
+LINKX(
+  (mlp_x): _MLPBlock(
+    (net): Sequential(
+      (0): Linear(in_features=165, out_features=128, bias=True)
+      (1): ReLU()
+      (2): Dropout(p=0.3, inplace=False)
+      (3): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (mlp_a_out): _MLPBlock(
+    (net): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (fuse): _MLPBlock(
+    (net): Sequential(
+      (0): Linear(in_features=384, out_features=128, bias=True)
+      (1): ReLU()
+      (2): Dropout(p=0.3, inplace=False)
+      (3): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (out): Linear(in_features=128, out_features=2, bias=True)
+)
+19:55:24 [INFO] ep 001  loss 0.2683  val AUC 0.9630  val F1-anom 0.7073  thr 0.956  *
+19:55:25 [INFO] ep 002  loss 0.1703  val AUC 0.9582  val F1-anom 0.7292  thr 0.957  *
+19:55:26 [INFO] ep 003  loss 0.1580  val AUC 0.9626  val F1-anom 0.6950  thr 0.981  
+19:55:27 [INFO] ep 004  loss 0.1505  val AUC 0.9622  val F1-anom 0.6876  thr 0.839  
+19:55:28 [INFO] ep 005  loss 0.1325  val AUC 0.9471  val F1-anom 0.6947  thr 0.817  
+19:55:29 [INFO] ep 006  loss 0.1338  val AUC 0.9757  val F1-anom 0.8406  thr 0.839  *
+19:55:30 [INFO] ep 007  loss 0.1294  val AUC 0.9690  val F1-anom 0.7609  thr 0.930  
+19:55:31 [INFO] ep 008  loss 0.1326  val AUC 0.9741  val F1-anom 0.7868  thr 0.993  
+19:55:32 [INFO] ep 009  loss 0.1228  val AUC 0.9537  val F1-anom 0.6957  thr 0.650  
+19:55:33 [INFO] ep 010  loss 0.1201  val AUC 0.9650  val F1-anom 0.7743  thr 0.951  
+19:55:35 [INFO] ep 011  loss 0.1154  val AUC 0.9746  val F1-anom 0.8092  thr 0.719  
+19:55:36 [INFO] ep 012  loss 0.1001  val AUC 0.9757  val F1-anom 0.8382  thr 0.927  
+19:55:37 [INFO] ep 013  loss 0.0969  val AUC 0.9673  val F1-anom 0.7930  thr 0.901  
+19:55:38 [INFO] ep 014  loss 0.0867  val AUC 0.9797  val F1-anom 0.8585  thr 0.745  *
+19:55:39 [INFO] ep 015  loss 0.0917  val AUC 0.9674  val F1-anom 0.7850  thr 0.750  
+19:55:40 [INFO] ep 016  loss 0.0922  val AUC 0.9805  val F1-anom 0.8617  thr 0.616  *
+19:55:41 [INFO] ep 017  loss 0.0861  val AUC 0.9751  val F1-anom 0.8117  thr 0.730  
+19:55:42 [INFO] ep 018  loss 0.0877  val AUC 0.9791  val F1-anom 0.8468  thr 0.751  
+19:55:43 [INFO] ep 019  loss 0.0850  val AUC 0.9802  val F1-anom 0.8623  thr 0.875  *
+19:55:45 [INFO] ep 020  loss 0.0855  val AUC 0.9744  val F1-anom 0.8213  thr 0.713  
+19:55:46 [INFO] ep 021  loss 0.0833  val AUC 0.9618  val F1-anom 0.7850  thr 0.763  
+19:55:47 [INFO] ep 022  loss 0.0831  val AUC 0.9746  val F1-anom 0.7982  thr 0.777  
+19:55:48 [INFO] ep 023  loss 0.0797  val AUC 0.9714  val F1-anom 0.8188  thr 0.824  
+19:55:49 [INFO] ep 024  loss 0.0778  val AUC 0.9759  val F1-anom 0.8430  thr 0.846  
+19:55:50 [INFO] ep 025  loss 0.0764  val AUC 0.9695  val F1-anom 0.8040  thr 0.793  
+19:55:51 [INFO] ep 026  loss 0.0648  val AUC 0.9797  val F1-anom 0.8261  thr 0.796  
+19:55:52 [INFO] ep 027  loss 0.0621  val AUC 0.9785  val F1-anom 0.8478  thr 0.916  
+19:55:53 [INFO] ep 028  loss 0.0652  val AUC 0.9767  val F1-anom 0.8000  thr 0.639  
+19:55:55 [INFO] ep 029  loss 0.0607  val AUC 0.9711  val F1-anom 0.8000  thr 0.714  
+19:55:55 [INFO] early stop @ epoch 29; best val F1-anom = 0.8623
+19:55:55 [INFO] ======================================================================
+19:55:55 [INFO] FINAL  dataset=elliptic  model=linkx
+19:55:55 [INFO] val  : AUC 0.9802  F1-anom 0.8623  P 0.9370  R 0.7987
+19:55:55 [INFO] test : AUC 0.8503  F1-anom 0.6064  P 0.8754  R 0.4638
+19:55:55 [INFO] confusion (test):
+[[10506    42]
+ [  341   295]]
+19:55:55 [INFO] classification report (test):
+              precision    recall  f1-score   support
+
+      benign     0.9686    0.9960    0.9821     10548
+     anomaly     0.8754    0.4638    0.6064       636
+
+    accuracy                         0.9658     11184
+   macro avg     0.9220    0.7299    0.7942     11184
+weighted avg     0.9633    0.9658    0.9607     11184
+

@@ -1,0 +1,105 @@
+00:56:06 [INFO] device=cuda  model=linkx  dataset=yelp
+00:56:06 [INFO] dataset stats: {'nodes': 45954, 'edges': 7693958, 'features': 32, 'anomalous': 6677, 'benign': 39277, 'anomaly_rate': 0.1453, 'train_nodes': 18381, 'val_nodes': 9191, 'test_nodes': 18382}
+00:56:07 [INFO] edge homophily (labeled endpoints): 0.7730
+00:56:08 [INFO] class_weight: [0.5850095748901367, 3.4408462047576904]
+00:56:08 [INFO] model:
+LINKX(
+  (mlp_x): _MLPBlock(
+    (net): Sequential(
+      (0): Linear(in_features=32, out_features=128, bias=True)
+      (1): ReLU()
+      (2): Dropout(p=0.4, inplace=False)
+      (3): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (mlp_a_out): _MLPBlock(
+    (net): Linear(in_features=128, out_features=128, bias=True)
+  )
+  (fuse): _MLPBlock(
+    (net): Sequential(
+      (0): Linear(in_features=384, out_features=128, bias=True)
+      (1): ReLU()
+      (2): Dropout(p=0.4, inplace=False)
+      (3): Linear(in_features=128, out_features=128, bias=True)
+    )
+  )
+  (out): Linear(in_features=128, out_features=2, bias=True)
+)
+00:56:11 [INFO] ep 001  loss 0.6494  val AUC 0.7519  val F1-anom 0.4046  thr 0.557  *
+00:56:14 [INFO] ep 002  loss 0.6117  val AUC 0.7601  val F1-anom 0.4048  thr 0.691  *
+00:56:17 [INFO] ep 003  loss 0.6075  val AUC 0.7704  val F1-anom 0.4233  thr 0.575  *
+00:56:20 [INFO] ep 004  loss 0.6028  val AUC 0.7741  val F1-anom 0.4252  thr 0.598  *
+00:56:23 [INFO] ep 005  loss 0.5931  val AUC 0.7780  val F1-anom 0.4287  thr 0.517  *
+00:56:27 [INFO] ep 006  loss 0.5935  val AUC 0.7795  val F1-anom 0.4335  thr 0.631  *
+00:56:31 [INFO] ep 007  loss 0.5879  val AUC 0.7874  val F1-anom 0.4365  thr 0.648  *
+00:56:34 [INFO] ep 008  loss 0.5841  val AUC 0.7855  val F1-anom 0.4354  thr 0.618  
+00:56:37 [INFO] ep 009  loss 0.5861  val AUC 0.7878  val F1-anom 0.4404  thr 0.623  *
+00:56:40 [INFO] ep 010  loss 0.5831  val AUC 0.7891  val F1-anom 0.4387  thr 0.663  
+00:56:43 [INFO] ep 011  loss 0.5864  val AUC 0.7885  val F1-anom 0.4358  thr 0.612  
+00:56:46 [INFO] ep 012  loss 0.5842  val AUC 0.7838  val F1-anom 0.4333  thr 0.697  
+00:56:49 [INFO] ep 013  loss 0.5944  val AUC 0.7860  val F1-anom 0.4369  thr 0.635  
+00:56:53 [INFO] ep 014  loss 0.5921  val AUC 0.7872  val F1-anom 0.4405  thr 0.596  
+00:56:57 [INFO] ep 015  loss 0.5830  val AUC 0.7901  val F1-anom 0.4364  thr 0.660  
+00:57:00 [INFO] ep 016  loss 0.5770  val AUC 0.7931  val F1-anom 0.4485  thr 0.635  *
+00:57:03 [INFO] ep 017  loss 0.5699  val AUC 0.7943  val F1-anom 0.4424  thr 0.556  
+00:57:06 [INFO] ep 018  loss 0.5721  val AUC 0.7944  val F1-anom 0.4526  thr 0.638  *
+00:57:09 [INFO] ep 019  loss 0.5670  val AUC 0.7988  val F1-anom 0.4584  thr 0.603  *
+00:57:12 [INFO] ep 020  loss 0.5644  val AUC 0.7985  val F1-anom 0.4584  thr 0.568  
+00:57:16 [INFO] ep 021  loss 0.5641  val AUC 0.8012  val F1-anom 0.4571  thr 0.607  
+00:57:20 [INFO] ep 022  loss 0.5633  val AUC 0.8034  val F1-anom 0.4565  thr 0.551  
+00:57:23 [INFO] ep 023  loss 0.5622  val AUC 0.8038  val F1-anom 0.4593  thr 0.728  *
+00:57:26 [INFO] ep 024  loss 0.5610  val AUC 0.8006  val F1-anom 0.4564  thr 0.683  
+00:57:29 [INFO] ep 025  loss 0.5560  val AUC 0.8088  val F1-anom 0.4743  thr 0.679  *
+00:57:32 [INFO] ep 026  loss 0.5558  val AUC 0.8074  val F1-anom 0.4704  thr 0.621  
+00:57:36 [INFO] ep 027  loss 0.5556  val AUC 0.8122  val F1-anom 0.4721  thr 0.692  
+00:57:39 [INFO] ep 028  loss 0.5560  val AUC 0.8101  val F1-anom 0.4669  thr 0.645  
+00:57:42 [INFO] ep 029  loss 0.5487  val AUC 0.8080  val F1-anom 0.4748  thr 0.533  *
+00:57:45 [INFO] ep 030  loss 0.5553  val AUC 0.8062  val F1-anom 0.4675  thr 0.583  
+00:57:49 [INFO] ep 031  loss 0.5518  val AUC 0.8098  val F1-anom 0.4673  thr 0.590  
+00:57:52 [INFO] ep 032  loss 0.5526  val AUC 0.8158  val F1-anom 0.4781  thr 0.643  *
+00:57:55 [INFO] ep 033  loss 0.5503  val AUC 0.8119  val F1-anom 0.4707  thr 0.606  
+00:57:58 [INFO] ep 034  loss 0.5467  val AUC 0.8155  val F1-anom 0.4708  thr 0.695  
+00:58:01 [INFO] ep 035  loss 0.5503  val AUC 0.8136  val F1-anom 0.4780  thr 0.568  
+00:58:04 [INFO] ep 036  loss 0.5456  val AUC 0.8171  val F1-anom 0.4739  thr 0.625  
+00:58:08 [INFO] ep 037  loss 0.5481  val AUC 0.8110  val F1-anom 0.4670  thr 0.609  
+00:58:12 [INFO] ep 038  loss 0.5481  val AUC 0.8120  val F1-anom 0.4721  thr 0.684  
+00:58:15 [INFO] ep 039  loss 0.5446  val AUC 0.8191  val F1-anom 0.4777  thr 0.638  
+00:58:18 [INFO] ep 040  loss 0.5448  val AUC 0.8154  val F1-anom 0.4766  thr 0.700  
+00:58:21 [INFO] ep 041  loss 0.5401  val AUC 0.8157  val F1-anom 0.4770  thr 0.670  
+00:58:24 [INFO] ep 042  loss 0.5390  val AUC 0.8167  val F1-anom 0.4689  thr 0.608  
+00:58:27 [INFO] ep 043  loss 0.5429  val AUC 0.8183  val F1-anom 0.4756  thr 0.696  
+00:58:31 [INFO] ep 044  loss 0.5388  val AUC 0.8194  val F1-anom 0.4806  thr 0.648  *
+00:58:35 [INFO] ep 045  loss 0.5403  val AUC 0.8202  val F1-anom 0.4796  thr 0.628  
+00:58:38 [INFO] ep 046  loss 0.5380  val AUC 0.8204  val F1-anom 0.4855  thr 0.663  *
+00:58:41 [INFO] ep 047  loss 0.5378  val AUC 0.8214  val F1-anom 0.4865  thr 0.598  *
+00:58:44 [INFO] ep 048  loss 0.5369  val AUC 0.8220  val F1-anom 0.4901  thr 0.654  *
+00:58:47 [INFO] ep 049  loss 0.5379  val AUC 0.8207  val F1-anom 0.4866  thr 0.650  
+00:58:50 [INFO] ep 050  loss 0.5420  val AUC 0.8192  val F1-anom 0.4789  thr 0.641  
+00:58:54 [INFO] ep 051  loss 0.5393  val AUC 0.8193  val F1-anom 0.4811  thr 0.674  
+00:58:58 [INFO] ep 052  loss 0.5385  val AUC 0.8194  val F1-anom 0.4806  thr 0.626  
+00:59:02 [INFO] ep 053  loss 0.5389  val AUC 0.8216  val F1-anom 0.4843  thr 0.638  
+00:59:05 [INFO] ep 054  loss 0.5352  val AUC 0.8198  val F1-anom 0.4829  thr 0.708  
+00:59:08 [INFO] ep 055  loss 0.5354  val AUC 0.8219  val F1-anom 0.4809  thr 0.659  
+00:59:11 [INFO] ep 056  loss 0.5339  val AUC 0.8208  val F1-anom 0.4860  thr 0.621  
+00:59:14 [INFO] ep 057  loss 0.5332  val AUC 0.8217  val F1-anom 0.4854  thr 0.645  
+00:59:17 [INFO] ep 058  loss 0.5330  val AUC 0.8221  val F1-anom 0.4865  thr 0.614  
+00:59:20 [INFO] ep 059  loss 0.5344  val AUC 0.8217  val F1-anom 0.4897  thr 0.638  
+00:59:24 [INFO] ep 060  loss 0.5296  val AUC 0.8232  val F1-anom 0.4911  thr 0.646  *
+00:59:27 [INFO] ep 061  loss 0.5317  val AUC 0.8229  val F1-anom 0.4883  thr 0.619  
+00:59:30 [INFO] ep 062  loss 0.5311  val AUC 0.8248  val F1-anom 0.4934  thr 0.582  *
+00:59:33 [INFO] ep 063  loss 0.5322  val AUC 0.8220  val F1-anom 0.4862  thr 0.640  
+00:59:36 [INFO] ep 064  loss 0.5296  val AUC 0.8208  val F1-anom 0.4817  thr 0.656  
+00:59:39 [INFO] ep 065  loss 0.5307  val AUC 0.8223  val F1-anom 0.4842  thr 0.671  
+00:59:42 [INFO] ep 066  loss 0.5323  val AUC 0.8227  val F1-anom 0.4872  thr 0.648  
+00:59:46 [INFO] ep 067  loss 0.5295  val AUC 0.8218  val F1-anom 0.4885  thr 0.613  
+00:59:50 [INFO] ep 068  loss 0.5292  val AUC 0.8224  val F1-anom 0.4869  thr 0.710  
+00:59:53 [INFO] ep 069  loss 0.5286  val AUC 0.8234  val F1-anom 0.4915  thr 0.630  
+00:59:56 [INFO] ep 070  loss 0.5239  val AUC 0.8233  val F1-anom 0.4895  thr 0.628  
+00:59:59 [INFO] ep 071  loss 0.5289  val AUC 0.8223  val F1-anom 0.4934  thr 0.641  
+01:00:02 [INFO] ep 072  loss 0.5246  val AUC 0.8239  val F1-anom 0.4921  thr 0.621  
+01:00:06 [INFO] ep 073  loss 0.5280  val AUC 0.8231  val F1-anom 0.4886  thr 0.617  
+01:00:09 [INFO] ep 074  loss 0.5319  val AUC 0.8232  val F1-anom 0.4917  thr 0.655  
+01:00:12 [INFO] ep 075  loss 0.5263  val AUC 0.8239  val F1-anom 0.4925  thr 0.622  
+01:00:16 [INFO] ep 076  loss 0.5319  val AUC 0.8230  val F1-anom 0.4903  thr 0.649  
+01:00:19 [INFO] ep 077  loss 0.5238  val AUC 0.8248  val F1-anom 0.4934  thr 0.635  
+01:00:19 [INFO] early stop @ epoch 77; best val F1-anom = 0.4934

@@ -1,0 +1,65 @@
+========================================================================
+GNN Research Report
+========================================================================
+
+# Total runs : 72
+# Datasets   : 2
+# Models     : 1
+# Seeds      : 3
+
+────────────────────────────────────────────────────────────────────────
+(A) Homophily vs performance — full features only
+────────────────────────────────────────────────────────────────────────
+  LINKX      corr(metric, homophily) = +1.000
+
+────────────────────────────────────────────────────────────────────────
+(B) Temporal vs static models on temporal datasets
+────────────────────────────────────────────────────────────────────────
+
+────────────────────────────────────────────────────────────────────────
+(C) Feature importance: full vs none vs random vs top-k
+────────────────────────────────────────────────────────────────────────
+feature_setting   full   none  random   topk
+category                                    
+homophilic      0.4378 0.1755  0.1900 0.5128
+
+Per-dataset Δ(none − full) — negative = features needed:
+    cora                   Δ=-0.4003   → FEATURES dominate
+    citeseer               Δ=-0.1243   → FEATURES dominate
+
+────────────────────────────────────────────────────────────────────────
+(D) Stability across seeds (CV = std / mean)
+────────────────────────────────────────────────────────────────────────
+Most stable (lowest CV):
+ dataset model feature_setting   mean    std  count     cv
+citeseer LINKX            full 0.3053 0.0055      3 0.0180
+    cora LINKX            topk 0.5748 0.0405     27 0.0704
+    cora LINKX            full 0.5703 0.0439      3 0.0770
+citeseer LINKX          random 0.1740 0.0185      3 0.1064
+citeseer LINKX            none 0.1810 0.0243      3 0.1344
+citeseer LINKX            topk 0.4507 0.0910     27 0.2019
+    cora LINKX            none 0.1700 0.0440      3 0.2590
+    cora LINKX          random 0.2060 0.0656      3 0.3187
+
+Least stable (highest CV):
+ dataset model feature_setting   mean    std  count     cv
+    cora LINKX          random 0.2060 0.0656      3 0.3187
+    cora LINKX            none 0.1700 0.0440      3 0.2590
+citeseer LINKX            topk 0.4507 0.0910     27 0.2019
+citeseer LINKX            none 0.1810 0.0243      3 0.1344
+citeseer LINKX          random 0.1740 0.0185      3 0.1064
+    cora LINKX            full 0.5703 0.0439      3 0.0770
+    cora LINKX            topk 0.5748 0.0405     27 0.0704
+citeseer LINKX            full 0.3053 0.0055      3 0.0180
+
+────────────────────────────────────────────────────────────────────────
+(E) Best configurations per dataset
+────────────────────────────────────────────────────────────────────────
+  citeseer:
+    LINKX      topk     → 0.4507
+    LINKX      full     → 0.3053
+    LINKX      none     → 0.1810
+  cora:
+    LINKX      topk     → 0.5748
+    LINKX      full     → 0.5703
+    LINKX      random   → 0.2060

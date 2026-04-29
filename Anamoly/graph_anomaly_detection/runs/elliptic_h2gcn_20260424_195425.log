@@ -1,0 +1,59 @@
+19:54:25 [INFO] device=cuda  model=h2gcn  dataset=elliptic
+19:54:35 [INFO] dataset stats: {'nodes': 203769, 'edges': 234355, 'features': 165, 'labeled_nodes': 46564, 'anomalous': 4545, 'benign': 42019, 'anomaly_rate': 0.0976, 'train_nodes': 29894, 'val_nodes': 5486, 'test_nodes': 11184, 'timesteps': 49}
+19:54:35 [INFO] edge homophily (labeled endpoints): 0.9537
+19:54:35 [INFO] class_weight: [0.5654888153076172, 4.317446708679199]
+19:54:35 [INFO] model:
+H2GCN(
+  (embed): Linear(in_features=165, out_features=64, bias=True)
+  (bn): BatchNorm1d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (classifier): Sequential(
+    (0): Linear(in_features=320, out_features=64, bias=True)
+    (1): ReLU()
+    (2): Dropout(p=0.3, inplace=False)
+    (3): Linear(in_features=64, out_features=2, bias=True)
+  )
+)
+19:54:36 [INFO] ep 001  loss 0.2611  val AUC 0.9611  val F1-anom 0.6923  thr 0.853  *
+19:54:38 [INFO] ep 002  loss 0.1635  val AUC 0.9626  val F1-anom 0.7028  thr 0.972  *
+19:54:39 [INFO] ep 003  loss 0.1439  val AUC 0.9727  val F1-anom 0.8213  thr 0.889  *
+19:54:40 [INFO] ep 004  loss 0.1365  val AUC 0.9698  val F1-anom 0.8070  thr 0.709  
+19:54:41 [INFO] ep 005  loss 0.1234  val AUC 0.9603  val F1-anom 0.6747  thr 0.840  
+19:54:43 [INFO] ep 006  loss 0.1195  val AUC 0.9597  val F1-anom 0.7158  thr 0.860  
+19:54:44 [INFO] ep 007  loss 0.1171  val AUC 0.9636  val F1-anom 0.7579  thr 0.772  
+19:54:45 [INFO] ep 008  loss 0.1164  val AUC 0.9749  val F1-anom 0.8070  thr 0.651  
+19:54:46 [INFO] ep 009  loss 0.1020  val AUC 0.9839  val F1-anom 0.8351  thr 0.751  *
+19:54:48 [INFO] ep 010  loss 0.0928  val AUC 0.9787  val F1-anom 0.8005  thr 0.672  
+19:54:49 [INFO] ep 011  loss 0.0860  val AUC 0.9742  val F1-anom 0.7971  thr 0.643  
+19:54:50 [INFO] ep 012  loss 0.0868  val AUC 0.9859  val F1-anom 0.8374  thr 0.892  *
+19:54:52 [INFO] ep 013  loss 0.0859  val AUC 0.9830  val F1-anom 0.8277  thr 0.654  
+19:54:53 [INFO] ep 014  loss 0.0889  val AUC 0.9741  val F1-anom 0.7826  thr 0.652  
+19:54:54 [INFO] ep 015  loss 0.0850  val AUC 0.9857  val F1-anom 0.8413  thr 0.602  *
+19:54:55 [INFO] ep 016  loss 0.0852  val AUC 0.9871  val F1-anom 0.8502  thr 0.908  *
+19:54:57 [INFO] ep 017  loss 0.0862  val AUC 0.9855  val F1-anom 0.8478  thr 0.878  
+19:54:58 [INFO] ep 018  loss 0.0844  val AUC 0.9774  val F1-anom 0.7732  thr 0.523  
+19:54:59 [INFO] ep 019  loss 0.0814  val AUC 0.9779  val F1-anom 0.7778  thr 0.638  
+19:55:00 [INFO] ep 020  loss 0.0835  val AUC 0.9719  val F1-anom 0.7585  thr 0.820  
+19:55:02 [INFO] ep 021  loss 0.0787  val AUC 0.9777  val F1-anom 0.7800  thr 0.508  
+19:55:03 [INFO] ep 022  loss 0.0727  val AUC 0.9774  val F1-anom 0.7912  thr 0.508  
+19:55:04 [INFO] ep 023  loss 0.0658  val AUC 0.9793  val F1-anom 0.8095  thr 0.380  
+19:55:06 [INFO] ep 024  loss 0.0708  val AUC 0.9819  val F1-anom 0.8213  thr 0.747  
+19:55:07 [INFO] ep 025  loss 0.0651  val AUC 0.9827  val F1-anom 0.8345  thr 0.541  
+19:55:08 [INFO] ep 026  loss 0.0587  val AUC 0.9806  val F1-anom 0.8164  thr 0.723  
+19:55:08 [INFO] early stop @ epoch 26; best val F1-anom = 0.8502
+19:55:09 [INFO] ======================================================================
+19:55:09 [INFO] FINAL  dataset=elliptic  model=h2gcn
+19:55:09 [INFO] val  : AUC 0.9869  F1-anom 0.8502  P 0.9239  R 0.7875
+19:55:09 [INFO] test : AUC 0.8911  F1-anom 0.5893  P 0.8785  R 0.4434
+19:55:09 [INFO] confusion (test):
+[[10509    39]
+ [  354   282]]
+19:55:09 [INFO] classification report (test):
+              precision    recall  f1-score   support
+
+      benign     0.9674    0.9963    0.9816     10548
+     anomaly     0.8785    0.4434    0.5893       636
+
+    accuracy                         0.9649     11184
+   macro avg     0.9230    0.7198    0.7855     11184
+weighted avg     0.9624    0.9649    0.9593     11184
+

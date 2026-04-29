@@ -1,0 +1,73 @@
+# YelpChi — static graph, binary node classification
+# label 1 = fraudulent review (anomaly, positive), label 0 = benign
+
+seed: 42
+device: cuda
+
+dataset:
+  name: yelp
+  root: /home/gowrav8849/V2/Anamoly/data/yelp
+  # YelpChi has 3 relations: R-U-R (same user), R-S-R (same star, same business),
+  # R-T-R (same month, same business). We homogenize by union of edges.
+  relations_mode: union              # {union, rur_only, rsr_only, rtr_only}
+  # inductive split, following PC-GNN / CARE-GNN
+  train_ratio: 0.40
+  val_ratio: 0.20
+  # test = remaining 0.40, stratified by label
+  stratified: true
+
+loader:
+  batch_size: 256
+  num_neighbors: [10, 5]
+  num_workers: 2
+
+train:
+  epochs: 100
+  patience: 15
+  lr: 5.0e-3
+  weight_decay: 5.0e-4
+  lr_scheduler: plateau
+  scheduler_factor: 0.5
+  scheduler_patience: 5
+  grad_clip: 1.0
+  class_weight: balanced
+  threshold_search: true
+
+models:
+  mlp:
+    hidden: 64
+    num_layers: 3
+    dropout: 0.4
+  gcn:
+    hidden: 64
+    num_layers: 2
+    dropout: 0.4
+  sage:
+    hidden: 64
+    num_layers: 2
+    dropout: 0.4
+    aggr: mean
+  gat:
+    hidden: 32
+    heads: 4
+    num_layers: 2
+    dropout: 0.4
+  h2gcn:
+    hidden: 64
+    k_hops: 2
+    dropout: 0.4
+  linkx:
+    hidden: 128
+    num_layers: 1
+    inner_mlp_layers: 1
+    dropout: 0.4
+
+# TGN not run on Yelp by default (static graph, no timestamps).
+# If you want to experiment with a temporal variant using review timestamps,
+# set this to true and provide a `timestamp_col` in the loader.
+tgn:
+  enabled: false
+
+logging:
+  runs_dir: runs
+  results_csv: reports/results.csv

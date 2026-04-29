@@ -1,0 +1,14 @@
+# Install torch for your CUDA version FIRST, then this file.
+# e.g. pip install torch==2.3.0 --index-url https://download.pytorch.org/whl/cu121
+
+torch_geometric>=2.5.0
+numpy>=1.24
+pandas>=2.0
+scikit-learn>=1.3
+scipy>=1.11
+PyYAML>=6.0
+tqdm>=4.66
+matplotlib>=3.7
+
+# Optional: enables fast sparse ops on GPU (recommended for 4GB VRAM)
+# pip install torch_scatter torch_sparse -f https://data.pyg.org/whl/torch-2.3.0+cu121.html
