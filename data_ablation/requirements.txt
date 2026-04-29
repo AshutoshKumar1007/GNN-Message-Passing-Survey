@@ -1,0 +1,9 @@
+torch>=2.1
+torch-geometric>=2.5
+torch-scatter
+torch-sparse
+numpy
+pandas
+scikit-learn
+matplotlib
+ogb
